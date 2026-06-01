@@ -66,4 +66,4 @@ It only uses built-in Python libraries:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/number-system-converter.git
+git clone https://github.com/TW4RDYDEV/number-system-converter.git
