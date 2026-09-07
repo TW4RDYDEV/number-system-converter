@@ -55,9 +55,7 @@ Version `1.0.0` is a complete rebuild of the original Tkinter project using **Py
 
 ## Preview
 
-```md
 ![Number System Converter Preview](assets/preview.png)
-```
 
 ## Supported Input
 
