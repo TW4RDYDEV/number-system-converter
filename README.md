@@ -55,10 +55,6 @@ Version `1.0.0` is a complete rebuild of the original Tkinter project using **Py
 
 ## Preview
 
-The UI is designed around a minimal dark interface with subtle green accents, glass-like cards, responsive layouts, and lightweight hover/press animations.
-
-> After running the app, replace this section with a fresh screenshot at `assets/preview.png`.
-
 ```md
 ![Number System Converter Preview](assets/preview.png)
 ```
