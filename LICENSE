@@ -1,21 +1,70 @@
-MIT License
+TW4RDYDEV SOURCE-AVAILABLE LICENSE v1.0
 
-Copyright (c) 2026 TWARDY
+Copyright (c) 2026 TW4RDYDEV. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This software and its source code (the "Software") are made publicly available
+for personal, educational, evaluation, and other non-commercial purposes,
+subject to the terms below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. PERMITTED USE
+
+You may view, download, run, study, and modify the Software for personal,
+educational, evaluation, and non-commercial use.
+
+2. COMMERCIAL USE
+
+You may not sell, rent, license, sublicense, monetize, host as a paid service,
+include in a commercial product or service, or otherwise use the Software for
+commercial purposes without prior written permission from TW4RDYDEV.
+
+Commercial licensing may be granted separately by TW4RDYDEV.
+
+3. REDISTRIBUTION
+
+Redistribution of the Software, modified versions, or substantial portions of
+the source code is permitted only for non-commercial purposes and only if:
+
+a. this license is included in full;
+b. the original copyright notice is retained;
+c. attribution to TW4RDYDEV remains clearly visible; and
+d. modified versions clearly state that they have been modified.
+
+4. ATTRIBUTION AND AUTHORSHIP
+
+You may not remove, obscure, or falsify copyright notices, license notices,
+author references, or attribution to TW4RDYDEV contained in the Software.
+
+You may not represent the original Software or substantial portions of it as
+your own original work.
+
+5. TRADEMARKS AND BRANDING
+
+This license does not grant permission to use TW4RDYDEV names, logos, marks, or
+branding in a way that suggests endorsement, sponsorship, or official status.
+
+6. NO WARRANTY
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+7. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, TW4RDYDEV SHALL NOT BE LIABLE FOR ANY
+CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH
+THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+8. TERMINATION
+
+Your rights under this license terminate automatically if you materially
+violate its terms. Upon termination, you must stop using and distributing the
+Software unless TW4RDYDEV provides written permission otherwise.
+
+9. COMMERCIAL LICENSING AND OTHER PERMISSIONS
+
+For commercial use, resale, redistribution for profit, or permissions beyond
+this license, contact TW4RDYDEV through the project's official GitHub profile
+or repository.
+
+This is a source-available license and is not an OSI-approved open-source
+license.
