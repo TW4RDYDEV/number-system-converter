@@ -1,6 +1,8 @@
 # Number System Converter v1.0.0
 
-The first official release of the rebuilt Number System Converter.
+The first official release of the rebuilt **Number System Converter**.
+
+Version `1.0.0` replaces the original Tkinter implementation with a redesigned desktop application built using **Python, PySide6, and QML**.
 
 ## Highlights
 
@@ -8,33 +10,49 @@ The first official release of the rebuilt Number System Converter.
 - Binary, octal, decimal, and hexadecimal conversion
 - Automatic prefix-aware number-system detection
 - Live multi-base conversion
-- 8/16/32/64-bit integer modes
-- Signed and unsigned interpretation
-- Two's-complement support for fixed-width bit patterns
+- 8-bit, 16-bit, 32-bit, 64-bit, and Auto width modes
+- Signed and unsigned integer interpretation
+- Two's-complement support
+- Automatic signed interpretation for non-decimal Auto mode
 - Negative integer support in Signed mode
-- Number inspector with bit/byte and representation details
+- Number inspector with bit, byte, sign, parity, and representation details
 - Persistent local conversion history
 - TXT and CSV history export
 - Dark, light, and system appearance modes
-- Keyboard shortcuts and copy actions
+- Keyboard shortcuts and copy-to-clipboard actions
 - Automated test suite
-- Windows executable build via GitHub Actions
+- Automated Windows build pipeline through GitHub Actions
+- SHA-256 release verification
 
 ## Windows
 
 Download:
 
-`NumberSystemConverter-v1.0.0-Windows-x64.exe`
+```text
+NSC-v1.0.0.exe
+```
 
-The packaged Windows release does not require a separate Python installation.
+No Python installation or dependency setup is required.
 
-A SHA-256 checksum is included alongside the executable.
+A SHA-256 checksum is provided alongside the executable:
+
+```text
+NSC-v1.0.0.exe.sha256
+```
+
+## Windows SmartScreen
+
+The executable is currently distributed without a commercial code-signing certificate.
+
+Because of this, Microsoft Defender SmartScreen may display an **"unrecognized app"** warning when the application is launched for the first time.
+
+Official builds are distributed only through this repository's GitHub Releases. The included SHA-256 checksum can be used to verify the downloaded executable.
 
 ## Source
 
-Developers can run the application from source with Python 3.11+ and PySide6.
+Developers can also run the application directly from source using Python 3.11+ and PySide6.
 
-See the repository README for setup and build instructions.
+See the repository README for setup, architecture, usage, and development information.
 
 ---
 
