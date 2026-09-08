@@ -14,7 +14,7 @@
 
 **Binary · Octal · Decimal · Hexadecimal**
 
-A polished desktop utility for developers, students, networking labs, and anyone who works with integer representations.
+A polished desktop utility for developers, students, networking labs, and anyone working with integer representations.
 
 </div>
 
@@ -22,9 +22,11 @@ A polished desktop utility for developers, students, networking labs, and anyone
 
 ## Overview
 
-**Number System Converter** converts integers between binary, octal, decimal, and hexadecimal while exposing the bit-level information behind the value.
+**Number System Converter** converts integers between binary, octal, decimal, and hexadecimal while exposing the bit-level information behind each value.
 
-Version `1.0.0` is a complete rebuild of the original Tkinter project using **Python, PySide6, and QML**. The application now provides live multi-base conversion, fixed-width integer modes, signed/unsigned interpretation, local history, export tools, and a redesigned desktop interface.
+Version `1.0.0` is a complete rebuild of the original Tkinter project using **Python, PySide6, and QML**.
+
+The application provides live multi-base conversion, signed and unsigned interpretation, fixed-width integer modes, two's-complement support, persistent history, export tools, configurable appearance, and a redesigned desktop interface.
 
 ## Features
 
@@ -35,23 +37,25 @@ Version `1.0.0` is a complete rebuild of the original Tkinter project using **Py
 - 8-bit, 16-bit, 32-bit, 64-bit, and Auto width modes
 - Signed and unsigned integer interpretation
 - Two's-complement interpretation for fixed-width bit patterns
+- Automatic signed interpretation for non-decimal values in Auto mode
 - Negative decimal support in Signed mode
 - Binary digit grouping
-- Uppercase/lowercase hexadecimal preference
-- Number inspector:
+- Uppercase and lowercase hexadecimal formatting
+- Number inspector with:
   - bit length
   - bytes required
   - parity
   - sign
   - decimal digit count
   - hexadecimal digit count
-- Persistent conversion history
-- Export history as TXT or CSV
+- Persistent local conversion history
+- TXT and CSV history export
 - Dark, light, and system appearance modes
 - Copy-to-clipboard actions
 - Keyboard shortcuts
-- Automated tests for the conversion engine
-- Automated Windows build workflow for tagged releases
+- Automated test suite
+- Automated Windows release builds through GitHub Actions
+- SHA-256 checksums for published Windows executables
 
 ## Preview
 
@@ -78,25 +82,30 @@ Auto mode intentionally avoids aggressive guessing.
 - Values containing `A-F` → Hexadecimal
 - Digits-only values → Decimal
 
-This prevents ambiguous values such as `10`, `100`, or `1010` from being silently treated as binary.
+This prevents ambiguous values such as `10`, `100`, or `1010` from being silently interpreted as binary.
 
 ## Signed Mode
 
 `Signed` controls whether a value may be interpreted as a signed integer.
 
-With a fixed width (`8/16/32/64-bit`), binary/octal/hex inputs use two's-complement interpretation. In `Auto` width, signed non-decimal inputs automatically use the smallest whole-byte width. For example:
+With a fixed width (`8/16/32/64-bit`), binary, octal, and hexadecimal inputs use two's-complement interpretation.
+
+When `Auto` width is selected, signed non-decimal inputs automatically use the smallest whole-byte width required to represent the value.
+
+Example:
 
 ```text
 1111 1111 + Signed + Auto  → -1 (8-bit)
 1111 1111 + Unsigned       → 255
 0x80 + Signed + Auto       → -128 (8-bit)
+0x7F + Signed + Auto       → 127 (8-bit)
 ```
 
-This keeps Auto mode useful while avoiding ambiguity for decimal input.
+Decimal input remains intentionally conservative in Auto mode to avoid ambiguous interpretation.
 
 ## Fixed-Width Integer Modes
 
-Choose `8-bit`, `16-bit`, `32-bit`, or `64-bit` to inspect the value as an integer with a specific width.
+Choose `8-bit`, `16-bit`, `32-bit`, or `64-bit` to inspect a value using a specific integer width.
 
 Example:
 
@@ -135,29 +144,79 @@ The recommended way to use Number System Converter is the official standalone Wi
 2. Download:
 
 ```text
-NumberSystemConverter-v1.0.0-Windows-x64.exe
+NSC-v1.0.0.exe
 ```
 
 3. Run the executable.
 
 No Python installation or dependency setup is required.
 
-A SHA-256 checksum is published with the release so the downloaded executable can be verified.
+A SHA-256 checksum is published alongside the executable:
 
-### Run from source
+```text
+NSC-v1.0.0.exe.sha256
+```
 
-Developers who prefer to run the source code can clone the repository:
+### Verify the Download
+
+On Windows, verify the executable with PowerShell:
+
+```powershell
+Get-FileHash .\NSC-v1.0.0.exe -Algorithm SHA256
+```
+
+Compare the resulting hash with the value stored in:
+
+```text
+NSC-v1.0.0.exe.sha256
+```
+
+## Windows SmartScreen
+
+The Windows executable is currently distributed without a commercial code-signing certificate.
+
+Because of this, Microsoft Defender SmartScreen may display an **"unrecognized app"** warning when the application is launched for the first time.
+
+Official builds are distributed only through this repository's **GitHub Releases**, and every release includes a SHA-256 checksum for verification.
+
+Code signing may be added to future releases.
+
+## Run from Source
+
+Developers who prefer to run the application directly from source can clone the repository:
 
 ```bash
 git clone https://github.com/TW4RDYDEV/number-system-converter.git
 cd number-system-converter
 ```
 
-Create and activate a virtual environment, then install the runtime dependency:
+Create a virtual environment:
 
 ```bash
 python -m venv .venv
+```
+
+Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+Install runtime dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+Run the application:
+
+```bash
 python main.py
 ```
 
@@ -169,11 +228,13 @@ Install development dependencies:
 pip install -r requirements.txt -r requirements-dev.txt
 ```
 
-Run tests:
+Run the complete test suite:
 
 ```bash
 pytest -q
 ```
+
+Windows executables are built automatically through GitHub Actions. Local users do not need to build the packaged release themselves.
 
 ## Project Structure
 
@@ -185,22 +246,30 @@ number-system-converter/
 ├── pyproject.toml
 │
 ├── app/
+│   ├── __init__.py
 │   ├── backend.py
+│   │
 │   ├── core/
+│   │   ├── __init__.py
 │   │   ├── converter.py
 │   │   ├── detector.py
 │   │   └── formatter.py
+│   │
 │   ├── services/
+│   │   ├── __init__.py
 │   │   ├── history.py
 │   │   └── settings.py
+│   │
 │   └── ui/
 │       ├── Main.qml
+│       │
 │       ├── components/
 │       │   ├── AppButton.qml
 │       │   ├── ResultCard.qml
 │       │   ├── StyledComboBox.qml
 │       │   ├── StyledTextField.qml
 │       │   └── ToggleSwitch.qml
+│       │
 │       └── pages/
 │           ├── ConverterPage.qml
 │           └── SettingsPage.qml
@@ -208,48 +277,78 @@ number-system-converter/
 ├── tests/
 │   ├── test_converter.py
 │   ├── test_detector.py
-│   └── test_formatter.py
+│   ├── test_formatter.py
+│   ├── test_qml_signal_handlers.py
+│   ├── test_release_sanity.py
+│   └── test_release_workflow.py
 │
 ├── assets/
 │   ├── banner.svg
 │   ├── icon.ico
-│   └── icon.png
+│   ├── icon.png
+│   └── preview.png
 │
 ├── .github/
 │   └── workflows/
 │       └── build-release.yml
 │
+├── .gitattributes
+├── .gitignore
 ├── CHANGELOG.md
+├── RELEASE_NOTES_v1.0.0.md
 ├── LICENSE
 └── README.md
 ```
 
 ## Release Automation
 
-Windows executables are built automatically by **GitHub Actions** on a Windows runner.
+Windows releases are built automatically using **GitHub Actions** on a Windows runner.
 
-When a version tag such as `v1.0.0` is pushed, the workflow:
+When a version tag such as:
 
-1. installs the project dependencies,
-2. runs the complete test suite,
-3. builds the standalone Windows executable,
-4. generates a SHA-256 checksum,
-5. creates the GitHub Release, and
-6. attaches both files to the release.
+```bash
+git tag v1.1.0
+git push origin v1.1.0
+```
 
-Users therefore do **not** need to build the executable themselves.
+is pushed, the workflow automatically:
+
+1. checks out the repository,
+2. configures Python,
+3. installs project dependencies,
+4. runs the automated test suite,
+5. builds the standalone Windows executable,
+6. generates a SHA-256 checksum,
+7. uploads the build artifact, and
+8. publishes the GitHub Release.
+
+Release files follow the naming format:
+
+```text
+NSC-v1.0.0.exe
+NSC-v1.0.0.exe.sha256
+```
+
+Future versions automatically inherit the corresponding version tag:
+
+```text
+NSC-v1.1.0.exe
+NSC-v2.0.0.exe
+```
 
 ## License
 
-This project is **source-available**, not OSI open source.
+This project is **source-available**, not OSI-approved open source.
 
 Personal, educational, evaluation, and other non-commercial use is permitted under the included license.
 
-**Commercial use, resale, monetization, or use in a commercial product/service requires prior written permission from TW4RDYDEV.**
+**Commercial use, resale, monetization, paid hosting, or inclusion in a commercial product or service requires prior written permission from TW4RDYDEV.**
 
-Attribution and copyright notices may not be removed.
+Redistributions must retain the original copyright, license, and attribution notices.
 
-See [`LICENSE`](LICENSE) for the full terms.
+The original TW4RDYDEV attribution may not be removed, obscured, or falsified.
+
+See [`LICENSE`](LICENSE) for the complete terms.
 
 ## Author
 
