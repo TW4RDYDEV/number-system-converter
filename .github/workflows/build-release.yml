@@ -42,7 +42,7 @@ jobs:
             --clean `
             --onefile `
             --windowed `
-            --name NumberSystemConverter `
+            --name NSC `
             --icon assets/icon.ico `
             --add-data "app/ui;app/ui" `
             --add-data "assets;assets" `
@@ -54,8 +54,9 @@ jobs:
         shell: pwsh
         run: |
           $version = "${{ github.ref_name }}"
-          $exeName = "NumberSystemConverter-$version-Windows-x64.exe"
-          Move-Item "dist/NumberSystemConverter.exe" "dist/$exeName"
+          $exeName = "NSC-$version.exe"
+
+          Move-Item "dist/NSC.exe" "dist/$exeName"
 
           $hash = (Get-FileHash "dist/$exeName" -Algorithm SHA256).Hash.ToLower()
           "$hash  $exeName" | Out-File -Encoding ascii "dist/$exeName.sha256"
@@ -63,8 +64,8 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: NumberSystemConverter-Windows-x64
-          path: dist/NumberSystemConverter*.exe
+          name: NSC-Windows-x64
+          path: dist/NSC*.exe
           if-no-files-found: error
 
       - name: Publish GitHub Release
@@ -72,9 +73,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: Number System Converter ${{ github.ref_name }}
-          body_path: RELEASE_NOTES_v1.0.0.md
+          generate_release_notes: true
           draft: false
           prerelease: false
           files: |
-            dist/NumberSystemConverter-${{ github.ref_name }}-Windows-x64.exe
-            dist/NumberSystemConverter-${{ github.ref_name }}-Windows-x64.exe.sha256
+            dist/NSC-${{ github.ref_name }}.exe
+            dist/NSC-${{ github.ref_name }}.exe.sha256
